@@ -94,17 +94,17 @@ _Engine started with 2 rule files and 53,400 rules loaded, including the custom 
 
 ### 3. All six detections fired
 
-![Detections](screenshots/04-six-detections.png)
+![Detections](screenshots/03-six-detections.png)
 _Splunk search showing alerts 9000001 to 9000006 from the attacker._
 
 ### 4. Attack timeline
 
-![Timeline](screenshots/05-attack-timeline.png)
+![Timeline](screenshots/04-attack-timeline.png)
 _Each attack appears as its own burst on the timeline._
 
 ### 5. Investigation
 
-![Investigation](screenshots/06-investigation.png)
+![Investigation](screenshots/05-investigation.png)
 _Pivoting from the SSH brute-force alert to flow and HTTP events from the same source._
 
 ---
