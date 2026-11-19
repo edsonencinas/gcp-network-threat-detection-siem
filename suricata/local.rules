@@ -1,0 +1,20 @@
+# --- LAB custom detections (sid range 9000000+) ---
+alert tcp any any -> $HOME_NET any (msg:"LAB Possible TCP SYN Port Scan"; \
+flags:S,12; threshold:type both, track by_src, count 20, seconds 10; \
+classtype:attempted-recon; sid:9000001; rev:1;)
+alert tcp any any -> $HOME_NET 22 (msg:"LAB SSH Brute Force Attempt"; \
+flow:to_server; flags:S,12; threshold:type threshold, track by_src, count 5, seconds 60; \
+classtype:attempted-admin; sid:9000002; rev:1;)
+alert http any any -> $HOME_NET any (msg:"LAB SQL Injection Attempt (UNION SELECT)"; \
+flow:established,to_server; http.uri; content:"union"; nocase; \
+content:"select"; nocase; distance:0; \
+classtype:web-application-attack; sid:9000003; rev:1;)
+alert http any any -> $HOME_NET any (msg:"LAB Path Traversal Attempt"; \
+flow:established,to_server; http.uri.raw; content:"../"; \
+classtype:web-application-attack; sid:9000004; rev:1;)
+alert http any any -> $HOME_NET any (msg:"LAB Nikto Scanner User-Agent"; \
+flow:established,to_server; http.user_agent; content:"Nikto"; nocase; \
+classtype:web-application-attack; sid:9000005; rev:1;)
+alert icmp any any -> $HOME_NET any (msg:"LAB Excessive ICMP Echo Requests"; \
+itype:8; threshold:type both, track by_src, count 10, seconds 10; \
+classtype:attempted-recon; sid:9000006; rev:1;)
